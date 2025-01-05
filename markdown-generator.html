@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mark Down Generator</title>
+
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      textarea {
+        height: 400px;
+        width: 80%;
+        padding: 10px;
+        font-size: 1em;
+        resize: none;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="editor">
+# Welcome to Markdown Previewer!
+
+## This is a sub-heading
+
+[GitHub](https://github.com/)
+
+Inline code: `<div></div>`
+
+Code block:
+```
+function greet() {
+    return "Hello, world!";
+}
+```
+
+- Item 1
+- Item 2
+- Item 3
+
+> This
+>
+> is
+>
+> a
+>
+> blockquote
+
+![Markdown Logo](https://upload.wikimedia.org/wikipedia/commons/4/48/Markdown-mark.svg)
+
+**This is bold text**
+    </textarea>
+
+    <div id="preview"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/marked/15.0.5/marked.min.js"
+      integrity="sha512-XoaXLJ3dYtMjpO3JrVpcgfXbVbAS3OFU3+wfs/ZHvu37N0zfNcWsOA5k3qKj9TmnzMvb0GTGy06OEbJRpjqfyA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script>
+      $(document).ready(function () {
+        marked.setOptions({
+          breaks: true,
+        });
+        $("#preview").html(marked.parse($("#editor").val()));
+        $("#editor").on("change keyup paste", function () {
+          $("#preview").html(marked.parse($("#editor").val()));
+        });
+      });
+    </script>
+  </body>
+</html>
