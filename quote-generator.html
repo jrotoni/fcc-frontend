@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quote Machine Generator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      #quote-box {
+        background-color: white;
+        border-radius: 10px;
+        padding: 20px;
+        width: 400px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        text-align: center;
+      }
+
+      #text {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+      }
+
+      #author {
+        font-size: 1.2em;
+        color: gray;
+        margin-bottom: 20px;
+      }
+
+      #new-quote {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 1em;
+      }
+
+      #new-quote:hover {
+        background-color: #0056b3;
+      }
+
+      #tweet-quote {
+        display: inline-block;
+        margin-top: 10px;
+        text-decoration: none;
+        color: white;
+        background-color: #1da1f2;
+        padding: 10px 20px;
+        border-radius: 5px;
+      }
+
+      #tweet-quote:hover {
+        background-color: #0d8bf2;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="quote-box">
+      <div id="text">...</div>
+      <div id="author">...</div>
+      <button id="new-quote">New Quote</button>
+      <a
+        id="tweet-quote"
+        href="https://twitter.com/intent/tweet"
+        target="_blank"
+        >Tweet Quote</a
+      >
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        const quotes = [
+          {
+            author: "José Rizal",
+            quote:
+              "Ang hindi magmahal sa sariling wika, daig pa ang hayop at malansang isda.",
+            translation:
+              "He who does not love his own language is worse than a beast and a stinking fish.",
+          },
+          {
+            author: "Nick Joaquin",
+            quote:
+              "The identity of the Filipino today is of a person asking what is his identity.",
+          },
+          {
+            author: "F. Sionil José",
+            quote: "Our country is not poor. It is poorly managed.",
+          },
+          {
+            author: "Lualhati Bautista",
+            quote:
+              "Kung may maituturo man ang nakaraan, ito ay ang pagiging bukas sa pagbabago.",
+            translation:
+              "If the past has anything to teach us, it is the need to be open to change.",
+          },
+          {
+            author: "Manuel L. Quezon",
+            quote:
+              "I prefer a government run like hell by Filipinos to a government run like heaven by Americans.",
+          },
+          {
+            author: "Jessica Zafra",
+            quote:
+              "Literature is the only thing that can hold us together in a world gone mad.",
+          },
+          {
+            author: "Randy David",
+            quote:
+              "When we recognize our shared humanity, it becomes easier to understand and forgive.",
+          },
+          {
+            author: "Edgardo M. Reyes",
+            quote:
+              "Ang buhay ay parang gulong, minsan nasa ibabaw, minsan nasa ilalim.",
+            translation:
+              "Life is like a wheel; sometimes you’re on top, sometimes you’re at the bottom.",
+          },
+          {
+            author: "Bienvenido Lumbera",
+            quote:
+              "Art and life are one; art shapes life, and life gives birth to art.",
+          },
+          {
+            author: "Amado V. Hernandez",
+            quote:
+              "Hindi kasalanan ang mangarap ng magaganda, kundi ang matakot na subukang gawin itong realidad.",
+            translation:
+              "It is not a sin to dream of beautiful things, but to fear trying to make them a reality.",
+          },
+        ];
+
+        function getRandomQuote() {
+          return quotes[Math.floor(Math.random() * quotes.length)];
+        }
+
+        function updateQuote() {
+          const newQuote = getRandomQuote();
+          $("#text").text(`"${newQuote.quote}"`);
+          $("#author").text(`- ${newQuote.author}`);
+          $("#tweet-quote").attr(
+            "href",
+            `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+              `"${newQuote.quote}" - ${newQuote.author}`
+            )}`
+          );
+        }
+
+        $("#new-quote").on("click", updateQuote);
+
+        updateQuote();
+      });
+    </script>
+  </body>
+</html>
